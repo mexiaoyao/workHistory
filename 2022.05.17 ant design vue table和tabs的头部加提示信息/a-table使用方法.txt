@@ -1,0 +1,52 @@
+        <!--列表开始-->
+        <a-table
+            :data-source="tableData"
+            :rowKey="(item) => item.UserID"
+            :pagination="pagination"
+            :loading="tableLoading"
+            :rowSelection="rowSelection"
+        >
+            <a-table-column key="Name" :title="$t('nickname')" data-index="Name" align="center" />
+            <a-table-column key="department" :title="$t('invitation.i18')" data-index="department" align="center" />
+            <a-table-column key="Status" align="center">
+                <div slot="title">
+                    {{$t('invitation.i15')}}
+                    <popover :content="$t('invitation.i20')" :title="$t('invitation.i15')"/>
+                </div>
+                <template slot-scope="text, item">
+                    <span>{{ item.Status == 6 ? $t('status_frozen') : $t('status_normal') }}</span>
+                </template>
+            </a-table-column>
+            <a-table-column key="Status" align="center">
+                <div slot="title">
+                    {{$t('is_frozen')}}
+                    <popover :content="$t('invitation.i21')" :title="$t('is_frozen')"/>
+                </div>
+                <template slot-scope="text, item">
+                    <span>{{ item.Status == 6 ? $t('status_frozen') : $t('status_normal') }}</span>
+                </template>
+            </a-table-column>
+
+            <a-table-column key="action" :title="$t('op')" align="center">
+                <template slot-scope="text, item">
+                    <div class="btn-inline">
+                        <a-button
+                            :data-account="item.UserID"
+                            type="primary"
+                            size="small"
+                            icon="setting"
+                            :title="$t('btn.setting')"
+                            @click="deletes(item.UserID)"
+                        />
+                        <a-button
+                            :data-account="item.UserID"
+                            type="danger"
+                            size="small"
+                            icon="delete"
+                            :title="$t('btn.del')"
+                            @click="deletes(item.UserID)"
+                        />
+                    </div>
+                </template>
+            </a-table-column>
+        </a-table>

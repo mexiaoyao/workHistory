@@ -1,0 +1,68 @@
+const { resolve } = require("core-js/fn/promise")
+
+module.exports = {
+    devServer: {
+      host: '0.0.0.0', //默认本地IP
+      port: 8081,//前端端口号
+      open: false,
+      proxy: {
+        [process.env.VUE_APP_BASE_API]: {  //代理接口路径  ---此处可以实现多个不同的服务器
+          target: `http://localhost:8092`, //后端地址----此处可以实现多个不同的服务器
+          changeOrigin: true,
+          pathRewrite: {
+            ['^'+process.env.VUE_APP_BASE_API]: ''
+          }
+        }
+      },
+    },
+    configureWebpack: config => {
+      if (process.env.NODE_ENV === 'production') {//生产（build）环境下的配置，
+          config.mode = 'production'
+          config.performance = {
+            maxEntrypointSize: 100000000,
+            maxAssetSize: 30000000
+          }
+      }
+      config.resolve.alias.set('@', resolve('src'))//备用名		-------------修改部分
+    }
+
+}
+
+##########一段时间后，再次启动项目时，提示启动异常 后改为以下代码#############
+
+const path = require('path')			-------------修改部分
+function resolve(dir) {			-------------修改部分
+  return path.join(__dirname, dir)		-------------修改部分
+}					-------------修改部分
+
+module.exports = {
+    devServer: {
+      host: '0.0.0.0',
+      port: 8081,
+      open: false,
+      proxy: {
+        [process.env.VUE_APP_BASE_API]: {
+          target: `http://localhost:8092`,
+          changeOrigin: true,
+          pathRewrite: {
+            ['^'+process.env.VUE_APP_BASE_API]: ''
+          }
+        }
+      },
+    },
+    configureWebpack: config => {
+      if (process.env.NODE_ENV === 'production') {
+          config.mode = 'production'
+          config.performance = {
+            maxEntrypointSize: 100000000,
+            maxAssetSize: 30000000
+          }
+      }
+						-------------修改部分
+    },
+    chainWebpack: (config)=>{				-------------修改部分
+      config.resolve.alias				-------------修改部分
+        .set('@', resolve('src'))				-------------修改部分
+    }						-------------修改部分
+
+}

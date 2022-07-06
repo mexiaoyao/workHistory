@@ -1,0 +1,36 @@
+1：在最外层的app.vue页面加对应代码
+export default {
+  name: 'App',
+  components: {
+    ElConfigProvider
+  },
+/////start
+  provide() {
+    return {
+      reload: this.reload
+    }
+  },
+  data() {
+    return {
+      isRouterAlive: true
+    }
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false
+      this.$nextTick(() => {
+        this.isRouterAlive = true
+      })
+    }
+  },
+////end
+
+
+2：在首页的子组件中加
+export default {
+  inject: ['reload'],///加这行
+  components: {
+
+3：在需要的方法中调用
+this.reload();
+即可实现刷新当前组件

@@ -1,0 +1,12 @@
+select deptid, max(dotime) as lasttime from ${itemTable} force index(dotime_deptid_dosomething)
+            <where>
+                deptid in
+                <foreach collection="sonList" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+                and dosomething IN (${dosomething}) and dotime &gt;= #{days} group by deptid
+            </where>
+
+
+使用force index(），因为有时候数据表需要建多条索引，sql在执行的时候无法准确使用索引，这时候就需要强制指定执行哪条索引了，
+这里就使用到我们的force index()了

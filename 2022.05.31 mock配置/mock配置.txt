@@ -1,0 +1,94 @@
+1：# 使用mockjs产生随机数据
+cnpm install mockjs --save-dev
+
+2：在src里新建文件夹mock
+	建index.js
+如下代码
+########
+import Mock from "mockjs";
+
+//当模拟数据分类比较多时，此处可以单独引入js文件
+//例如import './localMock';
+Mock.setup({
+    timeout: "300-600"
+});
+
+Mock.mock("/miniweb/invitingCode/getInviteControl", {
+    code: 10000,
+    data: {
+        'isInvitingCode|1': ['0', '1', '2']
+    }
+});
+##############
+
+localMock页面代码，对应上面的“import './localMock'”
+##########
+import Mock from "mockjs";
+const Random = Mock.Random;
+
+Mock.setup({
+    timeout: "300-600"
+});
+
+//通用访问
+Mock.mock("/api/ajax", {
+    code: 10000,
+});
+
+// 账号管理
+Mock.mock("/api/getAccount", {
+    code: 10000,
+    data: {
+        ["totalCount"]: 21,
+        [`list|10`]: [
+            {
+                // 属性 id 是一个自增数，起始值为 1，每次增 1
+                "id|+1": "@guid",
+                name: "@cname", //姓名
+                phone: /^1[385][1-9]\d{8}/,//手机
+                account: () =>{
+                    return Random.first().toLocaleLowerCase();
+                }, //账号
+                bindUserName : '', //绑定人员名称
+                'bingUserSex|1' : [0, 1, 2],//绑定人员性别
+                'roleId|1' : [1, 2, 3], //角色Id
+                'domainId|1' : [1, 2, 3], //分管范围
+            }
+        ]
+    }
+});
+########
+以下是
+import 'babel-polyfill';
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import './plugins/ant-design-vue.js';
+import i18n from './locales';
+import { notification } from 'ant-design-vue';
+import './assets/less/main.less';
+
+console.log(`前端版本号：${process.env.currentVersion || require('../package.json').version}`)
+//此处是根据环境是否引用mock
+process.env.NODE_ENV === "development" ? require("@/mock") : '';
+
+// 路由权限
+import './permission';
+import { getStatusLocalesKey } from '@/data/statusData';
+Vue.config.productionTip = false;
+notification.config({
+    duration: 2
+});
+//状态值国际化
+Vue.prototype.$s = getStatusLocalesKey;
+new Vue({
+    store,
+    router,
+    i18n,
+    render: h => h(App)
+}).$mount('#app');
+
+##############################
+有案例项目
+https://192.168.6.160/linkdood/linkdood-standard/java/web/linkdood-web-mobile/linkdood-mobile-admin.git

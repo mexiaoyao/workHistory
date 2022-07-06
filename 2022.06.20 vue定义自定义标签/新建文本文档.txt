@@ -1,0 +1,48 @@
+<template>
+<swiper v-bind:options="swiperOption">
+    <slot>8888</slot>//当使用<swiper-com>8888</swiper-com> 此处的888相对应
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
+</swiper>
+</template>
+
+<script>
+import { swiper } from "vue-awesome-swiper";
+import "swiper/dist/css/swiper.css";
+export default {
+    name: 'swiper-com',
+    components: {
+        swiper
+    },
+    data() {
+        return {
+            swiperOption: {
+                // 设置显⽰的个数
+                slidesPerView: 8,
+                //两个元素之间的距离
+                spaceBetween: 8,
+                //第一个元素默认在中心位置 true false为最左侧
+                centeredSlides: false,
+                // 设置点击箭头
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                }
+            },
+        };
+    },
+    methods: {
+        
+    },
+};
+</script>
+<style lang="less">
+.swiper-container{
+    .swiper-button-prev, .swiper-button-next {
+        widows: 16px;
+        height: 30px;
+        margin-top: -13px;
+        background-size: 16px 30px;
+    }
+}
+</style>

@@ -1,0 +1,46 @@
+    public enum RiskLevel implements BaseEnum<RiskLevel, Integer> {
+        VERY_LOW(1, "很低"),
+        LOW(2, "低"),
+        MEDIUM(3, "中"),
+        HIGH(4, "高"),
+        VERY_HIGH(5, "很高");
+
+        private final Integer value;
+        private final String name;
+
+        RiskLevel(Integer value, String name) {
+            this.value = value;
+            this.name = name;
+        }
+
+        public static String codeOf(int value) {
+            for (RiskLevel baseEnum : RiskLevel.values()) {
+                if (baseEnum.getCode() == value) {
+                    return baseEnum.getDescribe();
+                }
+            }
+            throw new RuntimeException("没有找到对应的枚举");
+        }
+
+        @JsonCreator
+        public static RiskLevel jsonCreate(Integer code) {
+            return EnumUtils.codeOf(RiskLevel.class, code);
+        }
+
+        @Override
+        public Integer getCode() {
+            return value;
+        }
+
+        @Override
+        @JsonValue
+        public String getDescribe() {
+            return name;
+        }
+    }
+
+
+############
+depthRegion.setRiskLevel(DepthRegion.RiskLevel.jsonCreate(icssasNode.getRiskLevel().getCode()));  
+//icssasNode.getRiskLevel().getCode()是int型数值
+

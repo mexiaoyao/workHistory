@@ -1,0 +1,5 @@
+在根目录下新建文件".env.local";
+在里面加本地和线上的变量，如下
+比如.env中参数VUE_APP_API_FIEX=https://192.168.6.77:10669/
+在.env.local中的就可以写成VUE_APP_API_FIEX=https://192.100.0.77:10669/
+这样本地运行的时候就会执行https://192.100.0.77:10669/了，且.env.local不要放在git管控目录下

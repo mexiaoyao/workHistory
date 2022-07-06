@@ -1,0 +1,17 @@
+    watch: {
+        'form': {
+            handler(newValue, oldValue) {
+                if (newValue.dateType != oldValue.dateType) {
+                    if (newValue.dateType == 1) {
+                        this.params.rangePicker = [this.getMomentDate(7), this.getMomentDate(1, false)];
+                    } else if (newValue.dateType == 2) {
+                        this.params.rangePicker = [this.getMomentDate(14), this.getMomentDate(1, false)];
+                    } else if (newValue.dateType == 3) {
+                        this.params.rangePicker = [this.getMomentDate(30), this.getMomentDate(1, false)];
+                    }
+                }
+                this.$emit('dateChange');
+            },
+            deep: true
+        }
+    },

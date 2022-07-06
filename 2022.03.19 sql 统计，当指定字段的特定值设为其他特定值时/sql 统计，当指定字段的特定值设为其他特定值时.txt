@@ -1,0 +1,23 @@
+select count(manufacturer) as manufacturerNum, manufacturer from (
+	select 
+		case 
+			when isnull(manufacturer) then '未知' 
+			when LENGTH(manufacturer) < 1 then '未知' 
+			when LENGTH(manufacturer) >= 1 then manufacturer
+		end
+		as manufacturer
+	from n4a_asset_sw
+	union all
+	select 
+		case 
+			when isnull(manufacturer) then '未知' 
+			when LENGTH(manufacturer) < 1 then '未知' 
+			when LENGTH(manufacturer) >= 1 then manufacturer
+		end
+		as manufacturer
+	from n4a_asset_pt
+)aa group by manufacturer order by manufacturerNum desc
+
+
+参考网址：https://blog.csdn.net/weixin_40417658/article/details/81288437；
+参考网址：https://blog.csdn.net/qq_16845639/article/details/78088499?locationNum=1&fps=1

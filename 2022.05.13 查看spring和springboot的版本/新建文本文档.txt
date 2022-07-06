@@ -1,0 +1,4 @@
+String springVersion = SpringVersion.getVersion();
+        String springBootVersion = SpringBootVersion.getVersion();
+        System.out.println("Spring版本:"+springVersion+"\nSpringBoot版本:"+springBootVersion);
+    

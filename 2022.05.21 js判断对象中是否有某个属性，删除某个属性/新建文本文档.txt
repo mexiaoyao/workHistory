@@ -1,0 +1,15 @@
+if(null!=this.selectedAddres && this.selectedAddres.length>0){
+        let obj = {area_no:this.selectedAddres.pop()};//获取数组的最后一个值
+        this.searchField = Object.assign(this.searchField, obj);//讲obj合并到searchField中，并覆盖searchField中重复的属性值
+      }else{
+        if(this.searchField.hasOwnProperty('area_no')){
+            Reflect.deleteProperty(this.searchField,"area_no");//删除指定属性
+        }
+      }
+
+其中
+person.hasOwnProperty('area_no') 
+改为
+person.hasOwnProperty.call('area_no')
+否则vue会报错
+Do not access Object.prototype method 'hasOwnProperty' from target object  no-prototype-builtins

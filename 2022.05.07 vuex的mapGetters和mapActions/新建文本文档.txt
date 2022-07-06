@@ -1,0 +1,173 @@
+若有多个getter时，可用...mapGetters([]),需要先export引入，且是es6语法，需要安装bable插件；
+...mapActions([])同理
+这样写可以简化代码
+具体用法如下：
+//productionListOne.vue中
+<script>
+import {mapGetters,mapActions} from 'vuex'
+//通过调用方法获取store.js里的数据
+compute:{
+products(){
+return this.Store.state.products
+},
+
+//若有多个getter时，可用...mapGetters([])
+...mapGetters([
+	"saleProducts",
+	//"akjsv",
+	...
+])
+},
+methods:{
+//若有多个action时，可用...mapActions([])
+...mapActions([
+	"reducePrice",
+	//"kgfjaj"
+	...
+
+])
+}
+
+以上是基本使用方法
+######一下解释更详细些######
+参考网址https://blog.csdn.net/qq_44858608/article/details/124461903
+1：Vue Components是我们的vue组件，组件会触发（dispatch）一些事件或者动作，也就是图中的Actions；
+2：我们在组件中发出的动作，肯定是想获取或者改变数据，但是在vuex中，数据是集中管理的，我们不能直接去更改数据，素偶一会把这个动作提交（Commit）到Mutactions中；
+3：然后Mutations就去改变（Mutate）State的数据；
+4：当State中的数据被改变之后，就会重新渲染（Render）到Vue Components中去，组件展示更操心后的数据，完成一个流程。
+
+Vuex的核心是Store，相当于是一个容器，一个Store实例中包含以下属性的方法：
+state中定义属性（状态、数据）
+我们要访问state中的数据有以下两种方法
+//定义属性（数据）
+var state = {
+count：6
+}
+//创建store对象
+const store = new Vuex.Store({
+state
+})
+//暴露store对象
+export default store
+方式一，在app.vue中就能通过this。Sstore访问该对象，获取count。
+<template>
+<div>
+//把count方法直接写入，可自己执行
+<h1>{{count}}</h1>
+</div>
+</template>
+<script>
+export default{
+name:'app',
+computed:{
+count(){
+return this.$stroe.state.count
+}
+方法2 vuex提供的mapGetters和mapActions来访问
+mapGetters用来获取属性（数据）
+1.在app.vue中引入mapGetters
+import {mapGetters} from ‘vuex’
+2：在app.vue文件的计算属性中调用mapGetters辅助方法，并传入一个数组，在数组中指定要获取的属性count
+<script>
+import {mapGetters,mapActions} from 'vuex'
+export default{
+name:'app'
+computed:mapGetters([
+//此处的count与以下store.js文件中的getters内的count相对应
+‘count’
+])
+}
+3：在store.js中定义getters方法并导出getters用来获取属性
+import Vue from ‘vue’
+import Vuex from ‘vuex’
+Vue.use(Vuex)
+
+//定义属性（数据）
+var state = {
+count：6
+}
+//定义getters
+var getters={
+	count（state）{
+		return state.count
+	}
+}
+//创建 store对象
+const store = new Vuex.Store({
+state,
+getters
+})
+//导出store对象
+export default store
+这样页面上就会显示传过来的数据，接下来我们通过动作改变获取到的数据
+4：在store。js中定义actions和mutations方法并导出actions定义方法（动作），可以是一部的发送请求。commit提交变化，修改数据的唯一方式就是显示的提交mutations。mutations定义变化，处理状态（数据）的改变。
+import Vue from ‘vue’
+import Vuex from ‘vuex’
+Vue.use(Vuex)
+//定义属性（数据）
+var state = {
+count：6
+}
+//定义getters
+var getters={
+	count（state）{
+		return state.count
+	}
+}
+//定义actions，要执行的动作，如流程的判断，异步请求
+const actions ={
+ // ({commit,state}) 这种写法是 es6 中的对象解构
+ increment({commit,state}){
+  //提交一个名为 increment 的变化，名字可自定义，可以认为是类型名，与下方 mutations 中的 increment 对应
+  //commit 提交变化，修改数据的唯一方式就是显式的提交 mutations
+  commit('increment') 
+ }
+
+// 定义 mutations ，处理状态（数据） 的改变
+const mutations ={
+ //与上方 commit 中的 ‘increment' 相对应
+ increment(state){
+  state.count ++;
+ }
+}
+// 创建 store 对象
+const store = new Vuex.Store({
+ state,
+ getters,
+ actions,
+ mutations
+})
+ 
+// 导出 store 对象
+export default store;
+
+5. 在 app.vue 中引入 mapActions ，并调用mapActions 用来获取方法（动作）
+
+import {mapGetters,mapActions} from 'vuex'
+
+  调用 mapActions 辅助方法，并传入一个数组，在数组中指定要获取的方法 increment
+
+    <template>
+     <div id="app">
+     //这个 increment 方法与下面 methods 中的 increment 相对应
+     <button @click="increment">增加</button>
+     <button>减少</button>
+     <h1>{{count}}</h1>
+     </div>
+    </template>
+     
+    <script>
+    import {mapGetters,mapActions} from 'vuex'
+    export default {
+     name: 'app',
+     computed:mapGetters([
+     'count'
+     ]),
+     methods:mapActions([
+     //该 increment 来自 store.js 中导出的 actions 和 mutations 中的 increment 
+     'increment',
+     ])
+    }
+    </script>
+
+}

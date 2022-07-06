@@ -1,0 +1,126 @@
+第一步，引入依赖
+<!-- Swagger 3 API接口调试工具        -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+第二步：新建配置文件SwaggerConfig
+@Configuration
+@EnableOpenApi
+public class SwaggerConfig {
+    /**
+     * 是否启用swagger文档，这个可以在application.yml中配置---此次未使用此代码
+     */
+    /*@Value("${swagger.enable}")
+    private boolean enable;*/
+
+    @Bean
+    public Docket defaultApi() {
+        return new Docket(DocumentationType.OAS_30)
+                .apiInfo(apiInfo())
+                .pathMapping("/")
+                .select()
+                // 选择那些路径和api会生成document
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .build();
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("接口文档")
+                //描述
+                .description("项目接口文档")
+                .version("1.0")
+                .build();
+    }
+}
+
+第三步，在对应页面中加对应参数：
+	a:controller
+@Api(tags = "首页接口")//对Controller的描述-----swagger参数
+@RestController
+@RequestMapping("index")
+public class IndexController {
+    @ApiOperation( value = "获取今日事件",notes = "获取今日事件")//对接口的描述
+    @ApiImplicitParams({//对传参的描述 多个参数就有多个@ApiImplicitParam用，隔开
+            @ApiImplicitParam(name = "id", value = "ID", required = false),
+            @ApiImplicitParam(name = "age", value = "年龄", required = false)
+    })
+    @GetMapping("/index")
+    public Index todayAlarm(String id,Integer age) {
+        Index ret = new Index(id,age);
+        return ret;
+    }
+}
+	b：实体类
+@ApiModel(description = "实体类")
+@Data
+public class Index implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty("参数1")//参数描述
+    private String parme1;
+
+    @ApiModelProperty("参数2")//参数描述
+    private Integer parme2;
+
+    public Index(String parme1, Integer parme2){
+        this.parme1 = parme1;
+        this.parme2 = parme2;
+    }
+}
+
+这时候重启，可能会重启失败，经过多次测试后，发现是 springBoot的版本和swagger3的版本不匹配的问题
+###
+将springBoot的版本由2.6.4 将为2.5.7版本，再次重启后，就启动正常了，并且前端打开也正常
+打开网址http://localhost:8092/test1/swagger-ui/index.html
+<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.4</version> <!--2.6.4 ->2.5.7-->
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+目前情况，在启动的时候，ide的console中会可能出现告警情况，如下面一行代码
+Unable to interpret the implicit parameter configuration with dataType: , dataTypeClass: class java.lang.Void（无法解释数据类型为的隐式参数配置：）
+那么避免告警就应该这样处理，在ApiImplicitParam中加上参数的属性dataTypeClass，如下
+@ApiOperation( value = "获取今日事件",notes = "获取今日事件")//对接口的描述
+    @ApiImplicitParams({//对传参的描述 多个参数就有多个@ApiImplicitParam用，隔开
+            @ApiImplicitParam(name = "id", value = "ID", required = false, dataTypeClass = String.class),
+            @ApiImplicitParam(name = "age", value = "年龄", required = false, dataTypeClass = Integer.class)
+    })
+    @GetMapping("/index")
+    public Index todayAlarm(String id,Integer age) {
+        Index ret = new Index(id,age);
+        return ret;
+    }
+
+###############
+启动和关闭配置
+第一步，在application.yml中添加参数
+#开启swagger
+swagger:
+  enable: false
+第二步，在SwaggerConfig中加参数获取
+/**
+     * 是否启用swagger文档，这个可以在application.yml中配置
+     */
+    @Value("${swagger.enable}")
+    private boolean enable;
+第三步：在Docket中加上.enable(enable)，如下
+@Bean
+    public Docket defaultApi() {
+        System.out.println("enable:"+enable);
+        return new Docket(DocumentationType.OAS_30)
+                .apiInfo(apiInfo())
+                .pathMapping("/")
+                .enable(enable)//开关代码
+                .select()
+                // 选择那些路径和api会生成document
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .build();
+    }
+
+

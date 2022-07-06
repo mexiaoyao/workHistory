@@ -1,0 +1,16 @@
+语法：date_sub(date,interval expr type)，函数从日期减去指定的时间间隔，
+
+比如date_sub('2019-07-27', interval 30 day)表示往前推30天
+
+select a* from icssas_patch a where  DATE_SUB(CURDATE(), INTERVAL 1 MONTH) < date (a.discoverTime)
+获取上个月今天（不包括当天），截至今天（包括今天）正好一个月；
+如果sql中的“<”小于号后加“=”等于号的话，那么获取的时间区间就是 上个月今天（包括当天），截至今天（包括今天）时间为一个月零一天；
+
+
+延伸
+SELECT NOW(),CURDATE(),CURTIME()
+NOW()获取当前时间 ----2022-02-17 11:31:48
+CURDATE()获取当前日期---2022-02-17
+CURTIME()获取当前小时----11:31:48
+
+

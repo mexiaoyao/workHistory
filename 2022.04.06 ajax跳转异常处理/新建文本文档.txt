@@ -1,0 +1,30 @@
+	//每一个Ajax 请求完成之后都会执行。
+	$(document).ajaxComplete(function (event, xhr, settings) {
+		//若HEADER中含有REDIRECT说明后端想重定向
+		if(xhr.statusText == 'parsererror'){
+			var win = window;
+			while(win != win.top){
+				win = win.top;
+			}
+			//将后端重定向的地址取出来,使用win.location.href去实现重定向的要求
+			win.location.href = "/ASN/login";
+		}
+	});
+
+###############
+
+当 AJAX 请求正在进行时显示 "loading" 的指示：
+
+$(document).ajaxStart(function(){
+    $("#wait").css("display","block");
+});
+$(document).ajaxComplete(function(){
+    $("#wait").css("display","none");
+});
+
+定义和用法
+ajaxComplete() 方法规定 AJAX 请求完成时运行的函数。
+
+注意：自 jQuery 版本 1.8 起，该方法只被附加到文档。
+
+不像 ajaxSuccess()，通过 ajaxComplete() 方法规定的函数将在请求完成时运行，即使请求并未成功。

@@ -1,0 +1,9 @@
+.gitignore 可以避免在提交代码时把我们不想上传的文件提交到git中
+以下为.gitignore文件中的内容
+# Maven #
+target/     # 此处可屏蔽target文件夹下的所有文件（包括文件夹）
+
+# IDEA #
+.idea/      # 此处可屏蔽.idea文件夹下的所有文件（包括文件夹）
+*.iml       # 可屏蔽当前目录下所有以.iml结尾的文件
+/src/main/java/***/demo.java　　　　　　　# 屏蔽指定目录下的单个文件

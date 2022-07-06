@@ -1,0 +1,39 @@
+vue+springboot前端如何获取服务器或磁盘中的图片
+1：后端静态资源路径映射
+@Configuration
+public class WebMvcConfig  implements WebMvcConfigurer {
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // /images/**是静态映射， file:/root/images/是文件在服务器的路径
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:D:/artproducts/images/");
+    }
+}
+
+安全过滤设置
+    private static final String[] EXCLUDE_URL = {
+            // swagger
+            "/doc.html",
+            "/swagger-ui.html",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/*/api-docs","/test/check",
+            "/sys/login","/login",
+            "/applets/login","/applets/logout","/applets/deviceType","/file/upload",
+            "/applets/myInfo","/applets/getPhone","/applets/bindUserName",
+            "/security/getImage","/imgs/**","/security/getSmsCode","/security/generator-QRCode",
+            "/sys/**",
+            // 错误处理
+            "/error/**",
+            "/lock/**"
+    };
+其中的"/imgs/**"为本次安全过滤
+
+前端代码
+http://localhost:1801/lock/imgs/2022-06-04/pic_1654339094220_00png.png?_t=1654339413169
+其中localhost:1801为后端ip和端口
+lock为项目前缀
+imgs为后端映射的参数。
+
+
+

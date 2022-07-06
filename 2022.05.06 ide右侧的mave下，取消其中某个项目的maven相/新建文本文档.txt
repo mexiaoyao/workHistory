@@ -1,0 +1,1 @@
+选中要取消的选项，右击，会有“unlink Maven project”再点击确认即可

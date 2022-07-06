@@ -1,0 +1,8 @@
+vue中的.browserslistrc 文件
+在使用脚手架搭建项目时，会自动生成.browserslistrc文件，该文件只要是 配置兼容浏览器
+
+对于部分配置参数做一些解释:
+" >1%" :代表着全球超过1%人使用的浏览器
+“last 2 versions” : 表示所有浏览器兼容到最后两个版本
+“not ie <=8” :表示IE浏览器版本大于8（实则用npx browserslist 跑出来不包含IE9 ）
+“safari >=7”:表示safari浏览器版本大于等于7

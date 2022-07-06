@@ -1,0 +1,2 @@
+
+this.params = this.$options.data.call(this).params;

@@ -1,0 +1,30 @@
+vue项目中，会使用elementUI等组件库，有些样式直接在组件中修改无效，又因为scoped局限于当前组件，去掉scoped的话又会影响全局样式。所以会用深度作用选择器来修改样式。
+1，>>>
+
+如果vue的style使用的是css,就可以用>>>。
+
+<style scoped>
+  .hide >>> el-upload--picture-card {
+      display:none;   /* 上传按钮隐藏 */
+  }
+</style>
+
+如果使用了预处理器（Sass 之类的）就可以使用下面两个。
+2,/deep/
+
+<style scoped lang="scss">
+  .hide /deep/ .el-upload--picture-card{
+    display:none;   /* 上传按钮隐藏 */
+  }
+</style>
+
+但是今天做样式处理的时候使用/deep/报错了，所以我就使用了::v-deep。
+3,::v-deep
+
+<style lang="scss" scoped >
+   .hide{
+     ::v-deep .el-upload--picture-card {
+       display:none;
+     }
+   }
+</style>

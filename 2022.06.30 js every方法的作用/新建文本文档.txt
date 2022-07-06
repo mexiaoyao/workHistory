@@ -1,0 +1,21 @@
+javaScript中every方法
+1：every()用于校验数组中的所有元素都满足指定条件（该条件为一个函数）；
+2：方法会便利数组的每一项，如果有一项不满足条件，则会返回false，剩余的不会再检测；
+标准用法
+array.every(function(currentValue,index,arr),thisValue);
+参数说明：
+    第一个参数为一个回调函数，必传，数组中的每一项都会遍历执行该函数。
+    currentValue：必传，当前项的值
+    index：选传，当前项的索引值
+    arr：选传，当前项所属的数组对象
+    第二个参数thisValue为可选参数，回调函数中的this会指向该参数对象。
+Tips:
+    every() 不会对空数组进行检测
+    every() 不会改变原始数组
+代码实例：
+var arr = [1000, 2000, 3000]
+var flag = arr.every(function (a, b, c) {
+    console.log(a + "===" + b + "====" + c) //1000===0====1000,2000,3000
+    return a > 2000;//数组中的每个元素的值都要大于2000的情况,最后才返回true
+})
+console.log(flag)   //false

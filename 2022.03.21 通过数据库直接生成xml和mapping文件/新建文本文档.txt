@@ -1,0 +1,6 @@
+第一步：通过cmd进入目录mybatis-generator-gui
+第二步：进入目录target\jfx\app
+cd target\jfx\app
+第三步：运行mybatis-generator-gui.jar包
+java -jar mybatis-generator-gui.jar
+

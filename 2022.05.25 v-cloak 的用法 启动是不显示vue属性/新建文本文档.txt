@@ -1,0 +1,28 @@
+
+v-cloak 的用法
+
+   在vue.js中 v-cloak 这个指令是防止页面加载时出现 vuejs 的变量名而设计的，但有时候添加了这个指令仍会显示变量，这是怎么回事呢？
+
+ v-cloak 的用法：
+
+  HTML代码：
+
+    <div v-cloak>
+      {{ message }}
+    </div>
+
+  CSS代码：
+
+    [v-cloak] {
+      display: none;
+    }
+
+这样直至div内变量编译完毕后才会显示。
+
+但有时添加完毕后仍有部分变量会显示，这是怎么回事呢？通过控制台查看，原来是 v-cloak 的display属性被优先级别高的样式覆盖所导致，我的处理方案是添加 !important ，简单粗暴。新css样式如下：
+
+    [v-cloak] {
+      display:none !important;
+    }
+
+经测试，并不会产生副作用。

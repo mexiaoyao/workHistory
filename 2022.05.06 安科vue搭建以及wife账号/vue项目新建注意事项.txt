@@ -1,0 +1,20 @@
+将外部库改为私有库
+二、私有NPM库使用说明
+安装说明
+全局安装nrm（nrm是管理和快速切换私人配置的registry）
+npm install nrm -g --save
+添加库链接
+nrm add linkdoodnpm http://172.16.8.90:4873/
+切换私有库
+nrm use linkdoodnpm
+安装package
+npm install（此步骤和其它项目一致）
+私有库Verdaccio服务启动说明
+nohup verdaccio &
+先杀掉verdaccio进程在启动，使用root用户
+安装路径：/root/.config/verdaccio
+二、下载到项目
+npm i -S ldd-antd-ex
+or
+yarn add -d ldd-antd-ex
+

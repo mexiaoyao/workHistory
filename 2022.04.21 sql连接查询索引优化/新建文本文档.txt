@@ -1,0 +1,1 @@
+连接查询的on语句，where语句，group语句，select语句接的字段都可以当做索引

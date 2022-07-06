@@ -1,0 +1,8 @@
+Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '(callSuper=false)' to your type. 
+ Inspection info: Offers general inspections for Lombok annotations.
+
+大致意思是默认子类的equals和hashCode方法，不会包含或者考虑基类的属性。我们可以通过反编译工具查看项目target/classes目录下的User.class的hashCode方法，默认情况下属性都是使用的他自身的属性。
+
+当我们根据警告提示，加上注解@EqualsAndHashCode(callSuper=true) ，警告消失（在Data下一行加）。
+
+

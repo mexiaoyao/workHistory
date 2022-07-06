@@ -1,0 +1,8 @@
+在pom.xml中的dependencies中加以下dependency，会自动将首页的静态页，默认为
+D:\java_test\test1\src\main\resources\templates\index.html
+即使controller的页面不设置首页指向。
+
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>

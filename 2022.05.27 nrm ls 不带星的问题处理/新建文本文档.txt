@@ -1,0 +1,16 @@
+进入本地全局包安装目录，例AppData/Roaming/npm/node_modules/nrm.
+nrm目录下打开cli.js文件，找到211行代码，修改如下.
+
+// fixed * no display issue.
+// cli.js 211行原代码
+if (hasOwnProperty(customRegistries, name) && (name in registries || customRegistries[name].registry === registry.registry)) {
+            registry[FIELD_IS_CURRENT] = true;
+            customRegistries[name] = registry;
+        }
+//cli.js 211行修改后 只需要把&&修改成||即可.
+if (hasOwnProperty(customRegistries, name) || (name in registries || customRegistries[name].registry === registry.registry)) {
+            registry[FIELD_IS_CURRENT] = true;
+            customRegistries[name] = registry;
+————————————————
+
+注意修改后需要使用nrm use切换后，方可生效

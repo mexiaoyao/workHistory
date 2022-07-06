@@ -1,0 +1,15 @@
+1、获取 npm 全局安装地址及缓存位置：打开电脑命令面板（windows + r，输入cmd），输入下面命令进行查询：
+
+1、npm 全局安装地址
+npm config get prefix
+
+2、npm 缓存位置
+npm config get cache
+
+2、设置 npm 安装的地址及缓存位置：
+
+1、设置npm安装的地址
+npm config set prefix "D:\programfiles\nodejs\node_global"
+
+2、npm缓存位置设置
+npm config set cache "D:\programfiles\nodejs\node_cache"

@@ -1,0 +1,14 @@
+1：npm install --save axios vue-axios  #安装
+2：在plugins的目录下新建axios.js的文件，内容为：
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+export default (app) => {
+  app.use(VueAxios, axios)
+}
+3：在main.js的页面加入代码	
+import installVueAxios from './plugins/axios'
+...
+installVueAxios(app)
+
+

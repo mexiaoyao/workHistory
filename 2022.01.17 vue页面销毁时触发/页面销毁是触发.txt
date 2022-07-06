@@ -1,0 +1,58 @@
+unmounted（）{
+
+}
+或者
+destroyed（）
+{}
+
+########v3后destroyed改为unmounted了########
+
+    destroyed 生命周期选项被重命名为 unmounted
+    beforeDestroy 生命周期选项被重命名为 beforeUnmount 
+
+
+#############
+1.beforeCreate 
+
+2.created ----进行异步操作，触发一次
+
+3.beforeMount
+
+4.mounted----操作DOM的最早时机
+
+5.beforeUpdate
+
+6.updated----操作最新的DOM元素，多次触发
+
+7.beforeDestroy
+
+8.destroyed
+####################
+二、认识vue3.0生命周期钩子函数
+
+1.setup 创建实例前
+
+2.onBeforeMount  挂载DOM前
+
+3.onMounted 挂载DOM后
+
+4.onBeforeUpdate 更新组件前
+
+5.onUpdated 更新组件后
+
+6.onBeforeUnmount 卸载销毁前
+
+7.onUnmounted  
+
+总结：
+
+1.Vue3生命周期的函数发生了变化
+
+2.去掉两个：beforeCreate和created，添加了setup
+
+3.方法名称发生变化：方法名称前面多了个on，中间是驼峰式的
+
+4.卸载组件的生命周期变化：onBeforeUnmount 、onUnmounted
+
+5.同一个生命周期可以触发多次
+

@@ -1,0 +1,13 @@
+D:\java\standard\server\server-enterprise-new\src\main\resources\config.properties
+在server-enterprise-new的resources目录下的config.properties下
+	将downlow下来的static.resourcePath=/linkdood-resource注释（前加#）；
+	再将download下来的改为static.resourcePath=https://172.16.8.153:10669/linkdood-resource其中153默认的为152；
+D:\java\standard\server\server-enterprise-new\src\main\resources\redis.properties
+其中redis的配置文件也需要对应修改下
+	讲redis.host=127.0.0.1修改为redis.host=172.16.8.153
+####################
+## Install（将对应的服务pom.xml移到ide右侧的maven中，并配置对应的mavan）
+1. IMServerRoot（maven处理后，执行生成jar包）
+2. starters（maven处理后，执行生成jar包）
+3. VServer（maven处理后，执行生成jar包）
+

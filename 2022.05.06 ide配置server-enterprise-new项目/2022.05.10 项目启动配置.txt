@@ -1,0 +1,11 @@
+1：D:\java\standard\server\server-enterprise-new\src\main\resources\config.properties；
+static.resourcePath=https://172.16.8.216:10669/linkdood-resource
+此处的IP需要和java的环境变量中的JAVA_IP同步
+上文中的172.16.8.216曾为172.16.8.153，后因有zoker
+
+2：图片的URl端口
+D:\java\standard\server\server-enterprise-new\src\main\resources\config.properties
+static.resourcePath=https://172.16.8.216:10443/linkdood-resource
+IP为216时，端口也要对应改为10443
+IP为153时，端口也要对应改为10669
+########2022.05.10

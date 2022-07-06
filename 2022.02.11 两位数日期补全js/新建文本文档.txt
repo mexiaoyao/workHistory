@@ -1,0 +1,22 @@
+/**
+ * 空返回 false 否则返回true
+ * **/
+export function isNotEmpty(obj) {
+    if (null != obj && undefined != obj && "" != obj) {
+        return true;
+    }
+    return false
+}
+
+/**
+ * 两位数补全，如果小于10前面补加0
+ * **/
+export function twoVarCom(dateVar) {
+    if(isNotEmpty(dateVar)){
+        var n = Number(dateVar);
+        if (!isNaN(n) && n*1<10){
+            return "0"+ n;
+        }
+    }
+    return dateVar
+}

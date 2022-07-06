@@ -1,0 +1,12 @@
+[THYMELEAF][http-nio-8080-exec-1] Exception processing template "distributeManagement/deleteApplyInfo": Error resolving template [distributeManagement/deleteApplyInfo], template might not exist or might not be accessible by any of the configured Template Resolvers。
+
+##########
+Exception processing template "
+
+错误太长了，我就分着截了。
+问题分析
+
+返回的内容不是Json字符串
+解决方案
+
+在RequestMapping的上面加上@ResponseBody注解即可。

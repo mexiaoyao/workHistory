@@ -1,0 +1,29 @@
+            <tree
+                        v-model="itemObj"
+                        :openLevel="1"
+                        border
+                        idBind="id"
+                        keyType="string"
+                        method="get"
+                        mode="menu"
+                        parentIdBind="parentid"
+                        sortField="orderNum"
+                        textBind="text"
+                        :search="search"
+                        :width="400"
+                        :lazy="true"
+                        @changes="changesMet"
+                        url="/organization/getOrgInfo.do"
+                    />
+
+itemObj绑定的是组织id
+
+mode="menu" 是以菜单形式显示
+
+method="get" ajax请求方式
+
+:search="search" 当数据很多时，可以加一个搜索框，对应此处
+
+:lazy="true" 懒加载
+
+@changes="changesMet" 点击时会触发数据变化，changes是对change的补充，可以获取到当前所有选中的树形信息

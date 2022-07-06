@@ -1,0 +1,20 @@
+cast() 函数用法
+cast（字段名 as 转换的类型） 其中类型，可以是
+CHAR[(N)] 字符型
+DATE 日期型
+DATETIME 日期和时间型
+DECIMAL float型
+SIGNED int
+TIME 时间型
+
+表实例
+date
+2015-11-03 15:31:26
+例如
+select cast（date as signed）as date from table
+结果
+date
+20151103153126
+select cast（date as datetime）as date from table
+date
+2015-11-03 15:31:26

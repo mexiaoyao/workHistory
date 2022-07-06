@@ -1,0 +1,42 @@
+1：npm install --save file-saver xlsx
+实例中可能会有xlsx的报错，这事xlsx的插件版本问题，可以适当处理下
+npm install xlsx@0.16.0 --save或者更高的版本
+2：在<script>中引入插件
+import FileSaver from 'file-saver'
+import XLSX from 'xlsx'
+3：在<a-table>中加 id="tableExport"
+如下
+<a-table id="tableExport">
+4：导出按钮 如下
+<a-button type="primary" @click="getInfoList('EXPORT')">导出数据</a-button>
+5：methods中的方法
+        async getInfoList(e) {
+            this.loading = true;
+            if (this.tableData) {
+                // 供导出用
+                if (e == 'EXPORT') {
+                    this.$nextTick(() => {
+                        this.exportDataMethod();
+                    })
+                }
+            } else {
+                message.warning('暂无信息');
+            }
+            this.loading = false;
+        },
+        exportDataMethod() {
+            let et = XLSX.utils.table_to_book(document.querySelector('#tableExport'));
+            let etout = XLSX.write(et, {
+                bookType: 'xlsx',
+                bookSST: true,
+                type: 'array'
+            });
+            try {
+                FileSaver.saveAs(new Blob([etout], {
+                type: 'application/octet-stream'
+                }), '导出.xlsx');
+            } catch (e) {
+                console.log(e, etout) ;
+            }
+            return etout;
+        },

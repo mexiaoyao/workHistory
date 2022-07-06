@@ -1,0 +1,15 @@
+1.安装Element Plus
+    先进入项目当中（cd project-name）
+cd project-name
+npm install element-plus --save
+2.项目中配置Element Plus
+vue add element-plus
+此步骤会有几个选择，默认选择即可！
+3.检查是否安装成功
+可以通过package.json来确认一下，安装成功后package.json可以看到相关依赖如下图：
+4.最后在项目中引入
+出现问题则使用：npm install
+5.启动 npm run serve
+有时可能会启动失败，显示“element-plus/lib/theme-chalk/index.css”未找到，在node_modules对应位置也没找到文件
+，后来通过百度或者，这是官方的一个bug，改为“element-plus/dist/index.css”即可！
+再次启动就可以了。

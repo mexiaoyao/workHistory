@@ -1,0 +1,173 @@
+
+@Service
+@Slf4j
+public class DepathInfoServiceImpl implements DepathInfoService {
+    private final ExecutorService executorService;   线程池
+
+    private final DepathInfoMapper depathInfoMapper;
+
+    //获取审计动态表名
+    private final AssetRegisterMapper assetRegisterMapper;
+
+
+    private final AlarmContentConfigMapper alarmContentConfigMapper;
+
+    @Autowired
+    public DepathInfoServiceImpl(DepathInfoMapper depathInfoMapper,
+                                 AssetRegisterMapper assetRegisterMapper,
+                                 AlarmContentConfigMapper alarmContentConfigMapper
+                                 ) {
+        this.depathInfoMapper = depathInfoMapper;
+        this.assetRegisterMapper = assetRegisterMapper;
+        this.alarmContentConfigMapper = alarmContentConfigMapper;
+        AtomicInteger index = new AtomicInteger(0);
+        executorService = new ThreadPoolExecutor(
+                Runtime.getRuntime().availableProcessors(),
+                Runtime.getRuntime().availableProcessors(),
+                0,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(),
+                r -> new Thread(r, "index-page-" + index.getAndIncrement()),
+                new ThreadPoolExecutor.DiscardOldestPolicy()
+        );
+    }
+
+    @Override
+    public List<DepathInfo> getTableList(String depthId){
+        List<DepathInfo> listData = new ArrayList<DepathInfo>();
+        try {
+            IndexTred baseData = tableInit(depthId);
+            //设置倒计时锁，锁大小为countDownLatch.countDown()的使用次数
+            //当子线程的任务全部执行完后才会返回data
+            CountDownLatch countDownLatch = new CountDownLatch(4);
+
+**************************
+	warnngAuditSubmit(
+                    countDownLatch,
+                    n4aAuditSwDoneData,
+                    baseData.getTableNameListN4aAuditSwDone(),
+                    baseData.getN4aAuditSwDoneDosomething(),
+                    baseData.getDeptIdSonsList(),
+                    baseData.getDay7s()
+                );
+            }
+
+
+            //等待其它线程全部执行结束
+            countDownLatch.await();
+
+        }catch(Exception e){
+            log.debug("线程异常");
+        }
+
+        return listData;
+    }
+
+
+
+    @Override
+    public List<DepathInfo> getTableListByType(String deptId){
+        List<DepathInfo> listData = new ArrayList<DepathInfo>();
+        try {
+            IndexTred baseData = tableInit(deptId);
+            //设置倒计时锁，锁大小为countDownLatch.countDown()的使用次数
+            //当子线程的任务全部执行完后才会返回data
+            CountDownLatch countDownLatch = new CountDownLatch(3);
+            //组织list--只获取子级
+            listData = baseData.getSonsList();
+
+            //此处开始包含子子孙孙组织ID--每个子组织，对应所有子子孙孙
+            StringUtils.getSonAllDepth(listData, baseData.getAllList());
+            if( null==baseData.getDeptIdSonsList() ||  baseData.getDeptIdSonsList().size()==0 ){
+                return listData;
+            }
+
+            //终端数量统计
+            List<AuditThreadResult> clientNum = new ArrayList<AuditThreadResult>();
+
+            warnngClientSubmit(countDownLatch, clientNum, baseData.getDeptIdSonsList());
+
+            //获取最新告警日期
+            //------n4a_audit_sw_done
+            List<AuditThreadResult> auditLastTime_n4aAuditSwDoneDosomething = new ArrayList<AuditThreadResult>();
+            List<AuditThreadResult> auditType_n4aAuditSwDoneDosomething = new ArrayList<AuditThreadResult>();
+            if ( null != baseData.getTableNameListN4aAuditSwDone() && baseData.getTableNameListN4aAuditSwDone().size() > 0  ) {
+                warnngAuditTimeSubmit(
+                    countDownLatch,
+                    auditLastTime_n4aAuditSwDoneDosomething,
+                    baseData.getTableNameListN4aAuditSwDone(),
+                    baseData.getN4aAuditSwDoneDosomething(),
+                    baseData.getDeptIdSonsList(),
+                    baseData.getDay7s()
+                );
+                warnngAuditTypeSubmit(
+                    countDownLatch,
+                    auditType_n4aAuditSwDoneDosomething,
+                    baseData.getTableNameListN4aAuditSwDone(),
+                    baseData.getN4aAuditSwDoneDosomething(),
+                    baseData.getDeptIdSonsList(),
+                    baseData.getDay7s()
+                );
+            }
+
+            //等待其它线程全部执行结束
+            countDownLatch.await();
+
+        }catch(Exception e){
+            log.debug("getTableListByType");
+        }
+        return listData;
+    }
+
+    /**
+     * 获取各组终端数量
+     * **/
+    private void warnngClientSubmit(CountDownLatch countDownLatch, List<AuditThreadResult> data, List<String> sonList) {
+        executorService.submit(() -> {
+            try {
+                warnngClient(data, sonList);
+            } catch (Exception e) {
+                log.error("error:", e);
+            } finally {
+                countDownLatch.countDown();
+            }
+        });
+    }
+    private synchronized void warnngClient(List<AuditThreadResult> data, List<String> sonList) {
+        data.addAll(depathInfoMapper.deptClientNumList(sonList));
+    }
+
+
+    private synchronized void warnngAuditLastTime(List<AuditThreadResult> data, List<String> tableNameList, String dosomething, List<String> sonList, String days) {
+        if(dosomething.contains("205")){
+            data.addAll(depathInfoMapper.n4aAudit7DayNumViolateaccess(tableNameList, sonList, days));
+        }else {
+            data.addAll(depathInfoMapper.warnngAuditLastTime(tableNameList, dosomething, sonList, days));
+        }
+    }
+
+    /**
+     * 获取各组最多告警类型
+     * **/
+    private void warnngAuditTypeSubmit(CountDownLatch countDownLatch, List<AuditThreadResult> data, List<String> tableNameList, String dosomething, List<String> sonList, String days) {
+        executorService.submit(() -> {
+            try {
+                warnngAuditType(data, tableNameList, dosomething, sonList, days);
+            } catch (Exception e) {
+                log.error("error:", e);
+            } finally {
+                countDownLatch.countDown();
+            }
+        });
+    }
+
+    private synchronized void warnngAuditType(List<AuditThreadResult> data, List<String> tableNameList, String dosomething, List<String> sonList, String days) {
+        if(dosomething.contains("205")) {
+            data.addAll(depathInfoMapper.warnngAuditTypeViolateaccess(tableNameList, sonList, days));
+        }else{
+            data.addAll(depathInfoMapper.warnngAuditType(tableNameList, dosomething, sonList, days));
+        }
+    }
+
+
+}

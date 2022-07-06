@@ -1,0 +1,11 @@
+命令
+1：rmdir /s d:\del\01 删除非空文件夹；
+
+2：rmdir d:\del\01 删除空文件夹；
+
+3：del c:log.log删除某个文件；
+
+4：del /F /S /Q c:log.log 强制删除某个文件；
+
+5：del /F /S /Q c:\vv 删除指定文件夹
+

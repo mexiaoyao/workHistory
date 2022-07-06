@@ -1,0 +1,5 @@
+1：用git组件
+	安装git history 和gitLens --Git supercharged 可以查看git的更新记录；
+2：设置
+	首选项
+		Emmet Preferences 配置settings.json

@@ -1,0 +1,19 @@
+        <!---特殊人可邀请 切换开始--->
+        <a-tabs default-active-key="1">
+            <a-tab-pane key="1"><!--<a-tab-pane key="1" :tab="$t('invitation.i5')"> 加内部的slot="tab"时，此处的tab就不能再加了，否则会以此处的内容显示-->
+                <!--被授权可邀请新人加本服务器的特殊人-->
+                <div slot="tab">
+                    {{$t('invitation.i5')}}
+                    <popover :content="$t('invitation.i9')" :title="$t('invitation.i5')"/>
+                </div>
+                <special-index />
+            </a-tab-pane>
+            <a-tab-pane key="2">
+                <!--白名单-->
+                <div slot="tab">
+                    {{$t('invitation.i6')}}
+                    <popover :content="$t('invitation.i10')" :title="$t('invitation.i6')"/>
+                </div>
+                <!---待加实例--->
+            </a-tab-pane>
+        </a-tabs>

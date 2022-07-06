@@ -1,0 +1,24 @@
+D:\java\admin\src\router\routerOperation.js
+/**
+ * 递归菜单--- 如果修改后端的服务器数据来源 那么此处的数据结构就需要对应处理--zl  待研究
+ * @param menus
+ * @param routers 路由配置数组
+ */
+const recursionMenu = (menus, routers) =>{
+    const sourceSrouters = router.getRoutes();
+    menus.forEach(menu =>{
+        if(menu.path && !sourceSrouters.some(route => route.path === menu.path)){
+            if(!menu.component){
+                menu.component = () => import(`@/views${menu.path.replace(/\/:[a-zA-Z0-9]+(\?)?/g, '')}/index.vue`);
+            }
+            menu.meta.isAsync = true;
+            routers.push(menu);
+
+            if(menu.childrens){
+                recursionMenu(menu.childrens, routers);
+            }
+        }else if(menu.children && menu.children.length > 0){
+            recursionMenu(menu.children, routers)
+        }
+    })
+}

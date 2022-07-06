@@ -1,0 +1,17 @@
+1，百度下载nvm安装软件
+2：给nvm设置下载源（即nvm安装会根据此处下载）
+	nvm ls available 查看可安装的node版本
+	有部分不包括其中，但是可以通过node的历史版本，直接安装
+	nvm list 查看已经安装的node版本
+	nvm use 版本号 ，会自动安装需要的node版本
+	nvm -v 查看nvm版本号，有时候 -v需要写成-version才可以
+	nvm install 版本号 安装指定node版本
+	nvm uninstall 版本号 卸载指定版本node
+
+####
+3：此时如果低于8的版本，使用npm的命令，有可能会提示“npm不是内部或外部命令..”的提示
+	a:参考网址https://blog.csdn.net/weixin_42031119/article/details/104158628
+	b:此时需要在https://registry.npmmirror.com/binary.html?path=npm/上下载和node版本对应的npm文件
+	c:解压受将cli-****复制到node安装的node_modules下并把文件名改为npm
+	d:再将npm下的bin文件下的npm，npm.cmd复制到node_modules同级目录下。
+	

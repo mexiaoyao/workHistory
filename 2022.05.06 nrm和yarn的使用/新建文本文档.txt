@@ -1,0 +1,5 @@
+npm install -g yarn
+此后可以使用yarn，yarn install和npm install的效果一致
+
+有时会不识别，就需要安装下
+npm instsall -g nrm

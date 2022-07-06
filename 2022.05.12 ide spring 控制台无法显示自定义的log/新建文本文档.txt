@@ -1,0 +1,5 @@
+找到logger的配置文件BaseController.java;
+将
+protected Logger logger = LoggerFactory.getLogger(this.getClass());中的this.getClass()
+改为
+protected Logger logger = LoggerFactory.getLogger(BaseController.class);的BaseController.class

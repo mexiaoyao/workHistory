@@ -1,0 +1,7 @@
+优化前代码
+select a.id from event a inner join info b on a.id = b.id where a.sourceIp is not null
+优化后代码
+select a.id from event a inner join info b on a.id = b.id where IFNULL(a.sourceIp,'kong') !='kong'
+
+is null的同理
+

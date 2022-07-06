@@ -1,0 +1,20 @@
+@Component  //-------------必须添加，否则静态变量获取不到值
+public class WebConstant {
+
+    public static String url;
+
+    @Value("${springconstant.url}") //此处的$也可能是# 当未#号时，其中的参数是对象，此时的springconstant对实体类
+    void setUrl(String url){
+        this.url = url;
+    }
+}
+
+
+配置文件中的内容（application.yml）
+springconstant:
+  url: https://hello.com
+
+
+知识延伸
+4、@component （把普通pojo实例化到spring容器中，相当于配置文件中的 <bean id="" class=""/>）
+泛指各种组件，就是说当我们的类不属于各种归类的时候（不属于@Controller、@Services等的时候），我们就可以使用@Component来标注这个类。

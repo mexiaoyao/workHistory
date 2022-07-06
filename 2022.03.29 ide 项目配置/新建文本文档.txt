@@ -1,0 +1,6 @@
+
+选择“+”号
+选择“Spring Boot”
+
+configuration-》Environment-》Working directory
+$MODULE_WORKING_DIR$

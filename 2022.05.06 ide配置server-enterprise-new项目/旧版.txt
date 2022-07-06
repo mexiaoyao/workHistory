@@ -1,0 +1,42 @@
+第一步：先配置java的环境
+# java环境配置
+## 环境变量
+1. JAVA_IP=172.16.8.153
+2. CONFIG_ENV_CODE=standardtest
+3. CONFIG_NAMESPACE=/vrv/im/config（此处不修改，照用）
+4. CONFIG_SERVER_URL=http://%JAVA_IP%:11999/vrvconfig/api
+5. CONFIG_ZK_URL=%JAVA_IP%:11100
+6. LOCAL_IP=127.0.0.1
+7. ZOOKEEPER_URL=%JAVA_IP%:11100
+
+第二步：安装三个服务
+## Install（将对应的服务pom.xml移到ide右侧的maven中，并配置对应的mavan）
+1. IMServerRoot（maven处理后，执行生成jar包）
+2. starters（maven处理后，执行生成jar包）
+3. VServer（maven处理后，执行生成jar包）
+4. 如果是启动vrvxin，需要先把server-ssoplugin也install（此服务暂时没用到）
+****配置maven内容补充
+首先点击file-》settings-》Build，Excecutiono，Deployment-》Build Tools-》maven
+	右侧的Maven home directory 在这里选择在maven的版本，暂时是默认的3.6.1版，我本地的mavan是3.6.0的运行时提示版本过低，
+	右侧的User settings file中设置mavan的配置，此配置文件可以指定位置，不一定非要放在conf中，此次将公司提供的配置文件settings.xml放在conf的vrv文件下，避免和以前的选择冲突。
+
+##############完成以上处理后，开始处理server-enterprise-new
+	1：完成maven处理；
+	2：tomcat处理，此处是版本9；
+	3：tomcat的ide启动设置；
+		Run/Deubug Configurations
+			点击左上角的“+”号，选择“Tomcat Server”选项的“local”；
+			server设置
+			a:选择tomcat的版本，要和本地的安装的一致；
+			b：url设置http://localhost:8080/server-enterprise/
+			c：下面的artifact设置，
+				选择war包后，修改下名字，将下划线改为中划线，并将new后面的字符去掉；
+			Deployment设置
+			a:点击右侧的“+”号选择“*****:war exploded”
+			b：下面的Application context 填入“/server-enterprise”
+
+#########################
+启东时会报错Error:java: java.lang.OutOfMemoryError: GC overhead limit exceeded
+处理方法：
+settings--->complier  适当修改这里里面的 Build process heap size(Mbytes) 的大小
+将其中的700改为7000；

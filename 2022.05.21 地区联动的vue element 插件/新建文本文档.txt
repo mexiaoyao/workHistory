@@ -1,0 +1,41 @@
+一、在Vue工程中下载element-china-area-data
+npm install element-china-area-data -S
+二、vue工程中使用
+1.注入element-china-area-data
+import {provinceAndCityData, CodeToText, TextToCode} from 'element-china-area-data';// 地址级联选择器
+2.使用
+
+代码如下（示例）：
+
+<template>
+  <div id="app">
+    <el-cascader
+      size="large"
+      :options="options"
+      v-model="selectedOptions"
+      @change="handleChange">
+    </el-cascader>
+  </div>
+</template>
+
+<script>
+  import { regionData } from 'element-china-area-data'
+  export default {
+    data () {
+      return {
+        options: regionData,
+        selectedOptions: []
+      }
+    },
+
+    methods: {
+      handleChange (value) {
+        console.log(value)
+      }
+    }
+  }
+</script>
+总结
+
+提示：最近在写Vue工程中需要实现省市区三级联动功能，这是我找到的非常简单的在Vue工程中实现省市区三级联动的方法，希望对大家有所帮助！
+原文链接：https://blog.csdn.net/qq_42919799/article/details/123092123

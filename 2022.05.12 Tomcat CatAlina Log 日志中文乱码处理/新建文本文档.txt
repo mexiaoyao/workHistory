@@ -1,0 +1,7 @@
+第一步：
+点击Edit Configurations；
+第二步
+进入Run/Debug Configurations
+第三部
+右侧的Server-》VM options 的输入框中输入双引号中的内容
+“-Dfile.encoding=UTF-8”；
