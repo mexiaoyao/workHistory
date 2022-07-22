@@ -18,3 +18,5 @@ export default {
     },
 };
 </script>
+
+##ant-design-vue版本："^1.7.8"
