@@ -1,0 +1,20 @@
+<template>
+    <div class="home">
+        <icon-font style="color:#686868;font-size:58px;" type="icon-qunzuduoren" />
+    </div>
+</template>
+
+<script>
+import { Icon } from 'ant-design-vue';
+import iconUrl from '@/assets/iconfont/iconfont.js'; //此处的js放在Icon.createFromIconfontCN的内部会引入失败
+const IconFont = Icon.createFromIconfontCN({
+    scriptUrl: iconUrl,
+});
+
+export default {
+    name: 'home',
+    components: {
+        IconFont,
+    },
+};
+</script>
