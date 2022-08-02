@@ -1,0 +1,46 @@
+
+在Javascript中，Undefined 和 Null 都是基本数据类型，null和undefined几乎相等
+在if语句中null和undefined都会转为false
+
+console.log(null==undefined);    //true  因为两者都默认转换成了false
+console.log(typeof undefined);    //"undefined"  
+console.log(typeof null);       //"object"  
+console.log(null===undefined);    //false   "==="表示绝对相等，null和undefined类型是不一样的，所以输出“false”
+复制代码
+
+null 和 undefined 基本同义，二者又有什么区别呢？
+
+    null表示没有对象，即该处不应该有值
+        作为函数的参数，表示该函数的参数不是对象
+        作为对象原型链的终点
+
+    undefined表示缺少值，即此处应该有值，但没有定义
+        定义了形参，没有传实参，显示undefined
+        对象属性名不存在时，显示undefined
+        函数没有写返回值，即没有写return，拿到的是undefined
+        写了return，但没有赋值，拿到的是undefined
+
+    null和undefined转换成number数据类型
+        null 默认转成 0
+        undefined 默认转成 NaN
+
+undefined 和 undeclared的区别
+
+var a; // undefined
+b;     // b is not defined
+复制代码
+
+区别：在变量作用域中已经申明但没有赋值的变量（如 a），是undefined。相反，在变量作用域中没有申明过的变量，是undeclared。
+
+我们试图访问“undeclared ”变量时这样报错：ReferenceError： b is not defined。并且typeof 对undefined 和 undeclared 变量返回的都是undefined。其实“ undefined” 和“ is not defined ”是两码事。
+
+
+##########数据类型##############
+
+
+
+简单数据类型又分为 字符串 string，数字 number，布尔 boolean
+
+复杂数据类型又分为 对象 Object 函数 function
+
+空的数据类型  空 null 未定义 undefined
