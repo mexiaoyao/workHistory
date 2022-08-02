@@ -92,3 +92,7 @@ new Vue({
 ##############################
 有案例项目
 https://192.168.6.160/linkdood/linkdood-standard/java/web/linkdood-web-mobile/linkdood-mobile-admin.git
+
+
+#####
+mock中的url和axios的url一致
