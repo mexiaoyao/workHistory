@@ -28,3 +28,7 @@ vue项目中，会使用elementUI等组件库，有些样式直接在组件中�
      }
    }
 </style>
+##2022.08.02#
+::v-deep报错问题请无视，暂没找到什么好的解决方案
+2.7 中使用 :v-deep(selector) 取代 ::v-deep
+自己模板中有使用到::v-deep{} 请替换:v-deep(selector){}
