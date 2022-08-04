@@ -1,0 +1,30 @@
+JavaScript endsWith() 方法
+判断字符串是否以指定的子字符串结尾（区分大小写）:
+let str = "Hello world";
+str.endsWith("world")   // 返回 true
+str.endsWith("World")   // 返回 false
+
+string.endsWith(searchvalue, length)
+let str = "123456789";
+str.endsWith("9", 9);  // true
+
+浏览器支持
+
+表格中的数字表示支持该属性的第一个浏览器版本号。
+				
+Chrome 41 	Edge 12 	Firefox 17 	Safari 9 	Opera 36
+Mar 2015 	Jul 2015 	Oct 2012 	Oct 2015 	Mar 2016
+
+################################################################
+JavaScript startsWith() 方法
+
+startsWith() 方法用于检测字符串是否以指定的子字符串开始。
+
+如果是以指定的子字符串开头返回 true，否则 false。
+
+startsWith() 方法对大小写敏感。
+var str = "123456789";
+var n = str.startsWith("2", 1);
+//true
+var n = str.startsWith("2", 2);
+//false
