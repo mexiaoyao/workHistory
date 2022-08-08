@@ -4,7 +4,7 @@
 全局安装nrm（nrm是管理和快速切换私人配置的registry）
 npm install nrm -g --save
 添加库链接
-nrm add linkdoodnpm http://172.16.8.90:4873/
+nrm add linkdoodnpm http://173.16.18.90:4873/
 切换私有库
 nrm use linkdoodnpm
 安装package
