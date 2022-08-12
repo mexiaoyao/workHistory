@@ -3,3 +3,9 @@
 2：设置
 	首选项
 		Emmet Preferences 配置settings.json
+
+#vue模板组件
+vue-helper
+1. 打开工具——左侧选择扩展搜索vue-helper插件安装；
+2. 进入文件——首选项——用户片段——输入选择Vue.json；
+3. 编辑vue.json
