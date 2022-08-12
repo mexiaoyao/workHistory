@@ -1,0 +1,21 @@
+JavaScript concat() 方法
+
+连接两个字符串:
+var str1 = "Hello ";
+var str2 = "world!";
+var n = str1.concat(str2); 
+n 输出结果:
+Hello world! 
+
+var txt1 = ["1"];
+var txt2 = ["2","3","4",];
+var n=txt1.concat(txt2);
+n 输出结果:["1","2","3","4",]
+
+var sedan = ["S60", "S90"];
+var SUV = ["XC40", "XC60", "XC90"];
+var wagon = ["V60", "V90", "V90CC"];
+var Volvo = sedan.concat(SUV, wagon);
+Javascript 数组
+concat() 方法连接两个或多个数组。
+S60,S90,XC40,XC60,XC90,V60,V90,V90CC
