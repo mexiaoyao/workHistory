@@ -1,0 +1,4 @@
+1：xshell xftp
+2：FinalShell
+3：WindTerm
+    介绍https://www.modb.pro/db/409909
