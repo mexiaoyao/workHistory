@@ -1,0 +1,70 @@
+可以使用<spring:message>标签结合 ResourceBundleMessageSource 的功能，在网页上显示 messages.properties 中的文字讯息，例如在 messages.properties文件中定义如下：
+
+    welcome=Hello, {0}  {1}. Welcome to Spring.
+
+注意： messages.properties 档案必须在 Classpath 可以存取到的路径下，例如放在 /WEB-INF/classes/下，您的 Bean 定义档中要加入 ResourceBundleMessageSource 的定义，例如：
+
+spring-mvc.xml配置文件中Bean定义如下：
+
+spring-mvc.xml配置文件中Bean定义如下：
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+                http://www.springframework.org/schema/util
+                http://www.springframework.org/schema/util/spring-util-3.2.xsd
+                http://www.springframework.org/schema/mvc
+                http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+        <!-- 打开注解  -->
+        <context:annotation-config />
+        <mvc:annotation-driven />
+        ......
+        <!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
+        <mvc:interceptors>
+            <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+        </mvc:interceptors>
+     
+        <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+     
+        <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+            <!-- 国际化信息所在的文件名 -->
+            <property name="basename" value="messages/messages" />
+            <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->
+            <property name="useCodeAsDefaultMessage" value="true" />
+        </bean>
+        ......
+    </beans>
+
+    在页面中可以直接使用
+
+    <%@page contentType="text/html"%>
+    <%@page pageEncoding="UTF-8"%>
+    <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Message Tag Demo</title>
+        </head>
+        <body>
+             <h1><spring:message code="welcome" arguments="Justin,Lin"/></h1>
+        </body>
+    </html> 
+##########################
+    arguments 读 a ge 门次
+    争论;辩论;论据;论点;参数
+
+argument的复数
+
+
+
+
