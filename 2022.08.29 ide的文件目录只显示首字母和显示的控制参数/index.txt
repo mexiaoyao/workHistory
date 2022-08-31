@@ -1,0 +1,5 @@
+如何调整idea下的项目包结构，使其更加紧凑。
+1：选择项目文件包右上角的“设置”按钮；
+2：Flatten Packages；
+
+参考地址：https://blog.csdn.net/RUIMENG061511332/article/details/82378423
