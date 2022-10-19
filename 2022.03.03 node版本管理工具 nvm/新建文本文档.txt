@@ -67,3 +67,7 @@ nvm uninstall 11.13.0
     nvm use [version] [arch] ：使用制定版本node。可指定32/64位。
     nvm root [path] ：设置存储不同版本node的目录。如果未设置，默认使用当前目录。
     nvm version ：显示nvm版本。version可简化为v。
+
+####
+查看node安装路径
+where node    ---------E:\install\node\node.exe
