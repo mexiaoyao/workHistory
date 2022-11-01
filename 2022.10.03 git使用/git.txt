@@ -1,0 +1,9 @@
+Git报错解决：fatal: unable to access ‘https://github.com/.......‘: OpenSSL SSL_read: Connection was reset
+
+
+产生原因：一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错
+
+参考网上解决办法：解除ssl验证后，再次git即可
+
+GIT Bash Here界面执行
+git config --global http.sslVerify "false"
