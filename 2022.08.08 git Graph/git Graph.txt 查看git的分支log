@@ -1,1 +1,32 @@
 插件 Git Graph 实现查看git的分支以及提交log详情图
+
+
+git ignorecase
+2022-07-22 09:50:23
+
+因为git默认的设置是忽略文件大小写的，这就会有可能导致不同分支拉取下来的同一文件的文件名大小写却不同，从而导致代码中对应的路径找不到而报错，那么这种问题怎么处理呢？
+
+很简单，直接使用 git config core.ignorecase false 命令 把git忽略大小写的配置关掉；
+
+    我们可以使用 git config core.ignorecase 命令来检查当前git配置的是否忽略大小写的配置，默认情况下应该是返回true，表示是忽略大小写的，不区分大小写；
+
+    当我们执行 git config core.ignorecase false 后 再去 执行 git config core.ignorecase 会发现这时候返回值是 false 代表我们成功关掉了git的忽略大小写配置；
+
+E:\github\youlianmei\.git\config 路径
+##################
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = false
+[remote "origin"]
+	url = https://github.com/mexiaoyao/youlianmei.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
+[branch "dev"]
+	remote = origin
+	merge = refs/heads/dev
