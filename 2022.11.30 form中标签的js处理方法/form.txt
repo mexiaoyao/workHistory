@@ -1,0 +1,9 @@
+1:radio名为aaaaaa的取消禁用状态
+$("input:radio[name=aaaaaa]").prop("disabled", false);
+比如：
+<input type="radio" name="aaaaaa" value="1" disabled/>
+
+2：radio名为aaaaaa的设置为禁用状态，并且选中value为0的。
+$("input:radio[name=aaaaaa][value='0']").prop("checked", true);
+$("input:radio[name=aaaaaa]").prop("disabled", true)
+                    
