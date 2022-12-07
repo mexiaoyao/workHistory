@@ -13,7 +13,7 @@
                         :width="400"
                         :lazy="true"
                         @changes="changesMet"
-                        url="/organization/getOrgInfo.do"
+                        url="url"
                     />
 
 itemObj绑定的是组织id
