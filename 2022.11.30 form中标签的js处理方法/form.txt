@@ -6,4 +6,7 @@ $("input:radio[name=aaaaaa]").prop("disabled", false);
 2：radio名为aaaaaa的设置为禁用状态，并且选中value为0的。
 $("input:radio[name=aaaaaa][value='0']").prop("checked", true);
 $("input:radio[name=aaaaaa]").prop("disabled", true)
-                    
+
+
+指定的选项是否选中判断
+var isApp = $('[name="releaseType"][value="1"]:checked').length > 0;
