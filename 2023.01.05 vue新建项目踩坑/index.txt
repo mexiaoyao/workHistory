@@ -1,0 +1,47 @@
+1:安装vue项目
+    首先安装vue-cli
+        a:查看版本npm view @vue/cli versions
+        b:选择版本npm install -g @vue/cli@3.12.1
+        c:创建项目vue create test1
+    引入前端
+        a:执行npm install --save ant-design-vue
+        b:引入代码，在 main.js 中引入并注册全部组件，即可在其它页面中直接使用全部组件（参考网址https://blog.csdn.net/wsmrzx/article/details/115769223）
+            // 新增代码：引入全部组件及样式
+            import Antd from 'ant-design-vue'
+            import 'ant-design-vue/dist/antd.css'
+        c:引入axios npm install axios并在main.js中引入axios,绑定到vue对象上
+            import axios from ‘axios’ //引入axios ，此处可以直接在使用页引用，很小的项目可以使用此方法
+            Vue.prototype.$http = axios
+        d：前端部分代码配置
+            1)vue.config.js环境配置
+            const API_FIEX = process.env.VUE_APP_API_FIEX //env的参数
+            module.exports = {
+                publicPath: process.env.NODE_ENV === 'production' ? './' : '/', //方式实际环境时，有时候需要将url中的第一个斜杠去掉，如：css的路径/css改为css
+                devServer: {  //devServer的属性，表示此处只作用于开发环境
+                    open: false,
+                    proxy: {
+                        '/': { //通常对应前缀
+                            target: API_FIEX,
+                            changeOrigin: true,
+                            secure: false
+                        }
+                    }
+                }
+            }
+        e:引入公共部分的js，可以随时修改对应参数
+            例如在public下新建一个public.js文件 
+                let limitPic = 10
+            在public下的index.html的head中引入js
+                <script src="public.js"></script>
+            在需要用的页面调用参数
+                mounted () {
+                    this.picLimit = limitPic //是data中先预制的属性
+                }
+            有的时候，例如上传文件中的url设置需要二次赋值，可以参考这个方法
+                  computed: {
+                        actionUrl () {
+                        return this.ipSport + 'upload'
+                        }
+                 },
+
+                
