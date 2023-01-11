@@ -1,0 +1,9 @@
+1：在vscode的扩展中添加i18n Ally组件
+2：设置-》用户-》i18n Ally 本项目中的.vscode的settings.json
+"i18n-ally.localesPaths": [
+        "src/locales/*"
+    ],
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.sourceLanguage": "zh"
+
+    或者当前界面的右下角“眼镜”修改显示语言的状态
