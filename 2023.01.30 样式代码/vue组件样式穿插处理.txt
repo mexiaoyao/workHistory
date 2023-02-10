@@ -1,0 +1,19 @@
+<style lang="scss" scoped>
+.dialogCodeDiff {
+  .center {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  ::v-deep {
+    .el-dialog {
+      .el-dialog__body {
+        padding: 0px 20px;
+      }
+    }
+  }
+}
+</style>
+
+方法1："::v-deep"如上;
+方法2：">>>";
+方法3：""??

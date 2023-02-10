@@ -1,0 +1,6 @@
+我们可以利用 css 样式中的 white-space，把文本区域的样式设置为： white-space: pre-line;
+， 就可以很方便的解决。
+注意不要使用 white-space: pre-wrap;
+ ，该样式会把前后空格也保留了，会出现对齐异常。
+
+ white-space: pre-wrap; 既能换行又可以保留空格
