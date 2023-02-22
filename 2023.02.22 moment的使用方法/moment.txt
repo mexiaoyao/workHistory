@@ -1,0 +1,7 @@
+<a-time-picker 
+ v-model="form.autoBackupTime"
+  valueFormat="HH:mm"
+  format="HH:mm" />
+valueFormat 可选，绑定值的格式，对 value、defaultValue 起作用。不指定则绑定值为 moment 对象
+当form.autoBackupTime为字符串格式时，如果valueFormat没有的话，会报错，有的话会正常显示。
+format 展示的时间格式

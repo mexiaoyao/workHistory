@@ -1,0 +1,57 @@
+1.比较数据差异,结合计算属性使用深拷贝,
+    data:{
+            testData:{
+                dataInfo:{
+                    a: '我是a',
+                    b: '我是b'
+                }
+            }
+        },
+        watch: {
+          testData: {
+            handler: (val, olVal) => {
+              console.log('我变化了', val, olVal)
+            }
+          }
+        },
+        computed: {
+          testDateNew() {
+         return JSON.parse(JSON.stringify(this.testData))  
+      } 
+    }
+
+如果testData发生了变化，就会打印出val，olVal，但是他们打印出来的结果都是一样的，因为数据同源。虽然可以监听到他的变化，但是要比较数据差异就不行了。如果想要得到不同的值可以结合计算属性。
+2. 详解watch中的immediate、handler和deep属性
+
+侦听器watch的其他方式
+
+代码如下（示例）：
+
+1、immediate和handler
+
+如果我们需要在最初绑定值的时候也执行函数，则就需要用到immediate属性。
+
+2、deep
+
+当需要监听一个对象的改变时，普通的watch方法无法监听到对象内部属性的改变，此时就需要deep属性对对象进行深度监听。
+
+      watch: {
+          testData: {
+            handler: (val, olVal) => {
+              console.log('我变化了', val, olVal)
+            },
+            deep: true,
+            immediate: true
+           }
+        },
+
+2. 侦听器watch的其他方式
+
+    Vue3文档中没有提到的，但是Vue2文档中有提到的是侦听对象的属性：
+
+         'info.name': function(newValue, oldValue) {
+          console.log(newValue, oldValue);
+          } 
+————————————————
+版权声明：本文为CSDN博主「vanora1111」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/vanora1111/article/details/123500922
