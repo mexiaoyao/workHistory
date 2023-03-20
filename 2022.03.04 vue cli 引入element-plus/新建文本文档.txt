@@ -1,5 +1,5 @@
-1.��װElement Plus
-    �Ƚ�����Ŀ���У�cd project-name��
+1.安装װElement Plus
+    进入目录cd project-name
 cd project-name
 npm install element-plus --save
 2.��Ŀ������Element Plus
@@ -8,8 +8,8 @@ vue add element-plus
 3.����Ƿ�װ�ɹ�
 ����ͨ��package.json��ȷ��һ�£���װ�ɹ���package.json���Կ��������������ͼ��
 4.�������Ŀ������
-����������ʹ�ã�npm install
-5.���� npm run serve
+执行npm install
+5.运行 npm run serve
 ��ʱ���ܻ�����ʧ�ܣ���ʾ��element-plus/lib/theme-chalk/index.css��δ�ҵ�����node_modules��Ӧλ��Ҳû�ҵ��ļ�
 ������ͨ���ٶȻ��ߣ����ǹٷ���һ��bug����Ϊ��element-plus/dist/index.css�����ɣ�
 �ٴ������Ϳ����ˡ�
