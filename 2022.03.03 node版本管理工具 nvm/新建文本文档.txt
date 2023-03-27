@@ -69,5 +69,5 @@ nvm uninstall 11.13.0
     nvm version ：显示nvm版本。version可简化为v。
 
 ####
-查看node安装路径
+查看node安装路径--打开CMD可以查询到，vsCode的没查到
 where node    ---------E:\install\node\node.exe
