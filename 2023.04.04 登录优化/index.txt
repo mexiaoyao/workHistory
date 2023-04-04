@@ -1,0 +1,6 @@
+<form @submit.prevent="login"></form>
+    <button type="bubmit" @click.stop="login">
+</button>
+
+可以实现，在中文输入法输入时，回车键回车后，输入框正常输入，不会触发登录事件
+兼容浏览器，火狐
