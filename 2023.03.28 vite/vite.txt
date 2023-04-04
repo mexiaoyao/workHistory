@@ -1,0 +1,13 @@
+1: Vite的安装和使用
+注意：Vite本身也是依赖Node的，所以也需要安装好Node环境并且Vite要求Node版本是大于12版本的；
+    首先，我们安装一下vite工具：
+    npm install vite –g # 全局安装
+    npm install vite –D # 局部安装
+2:通过vite来启动项目：
+    npx vite
+
+
+创建开始
+1：创建项目
+npm create vite@latest vite-vue-js-template -- --template vue
+---这一指令将会安装并执行 create-vite，它是一个基本模板快速启动项目工具。
