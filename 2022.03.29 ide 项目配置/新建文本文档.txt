@@ -4,3 +4,6 @@
 
 configuration-》Environment-》Working directory
 $MODULE_WORKING_DIR$
+
+#ide相关配置
+1：Help-》change memory setttings 此处修改的效果，等同于C:\Users\（电脑用户名）\.IntelliJIdea2019.3\config\idea64.exe.vmoptions中修改
