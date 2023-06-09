@@ -1,0 +1,104 @@
+解决Error:Kotlin: Module was compiled with an incompatible version of Kotlin. The binary version of ..
+
+
+文章目录
+
+    1. 问题
+    2. 分析问题
+    3. 升级kotlin插件版本
+        3.1 升级方法1
+        3.1 升级方法2
+    4. 其他问题
+        4.1 方法1中的Cannot download ... Read timed out问题
+        4.2 方法2中的Plugin 'Kotlin' is incompatible with this installation问题
+
+1. 问题
+
+今天在启动spring boot项目时，idea报出错误：Error:Kotlin: Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 1.5.1, expected version is 1.1.13.，如下图所示：
+
+在这里插入图片描述
+2. 分析问题
+
+原来是idea的kotlin插件版本比pom中的低。
+
+对此，可以有以下两种思路：
+
+    把项目里面的版本降一下
+
+    一种是升级下idea插件的版本
+
+我选择了后者，但搞了好久，才解决这个问题
+
+下面总结了两种方法。
+3. 升级kotlin插件版本
+3.1 升级方法1
+
+    打开kotlin面板
+
+    Windows系统：File -> settings -> Languages & Frameworks -> Kotlin
+
+    mac系统：Preferences -> Languages & Frameworks -> Kotlin
+
+在这里插入图片描述
+
+    点击Check again
+
+在这里插入图片描述
+
+你会发现Kotlin当前版本是1.3.21-release-IJ2019.1-2，但新版本是1.3.72，因而，我们需要升级Kotlin版本。
+
+    install
+
+在这里插入图片描述
+在这里插入图片描述
+
+    安装成功
+
+在这里插入图片描述
+3.1 升级方法2
+
+如果因为某些插件需要翻墙下载，出现Download failed的情况，可以去官网直接下载，可以通过如下方式进入官网和安装Kotlin：
+
+    File -> Settings -> Plugins
+
+    选择installed的tab框
+
+    在搜索框中输入Kotlin
+
+    单击图表，如下图所示：
+
+在这里插入图片描述
+
+    双击图表，即可进入到官网
+
+在这里插入图片描述
+
+    选择我们需要的版本下载
+
+在这里插入图片描述
+
+    若下载完成后，如下方式安装
+
+在这里插入图片描述
+4. 其他问题
+4.1 方法1中的Cannot download … Read timed out问题
+
+在install时，可能会出现网络超时的问题，即：
+
+Plugin Kotlin was not installed: Cannot download 'https://plugins.jetbrains.com/pluginManager/?action=download&id=org.jetbrains.kotlin&build=IU-191.6183.87&uuid=21a4a4e1-1cb8-4d41-b073-3ce4ffa8ab33': Read timed out , response: 200 OK
+
+如下图所示：
+
+在这里插入图片描述
+
+这种情况，多试几次就可以了。
+4.2 方法2中的Plugin ‘Kotlin’ is incompatible with this installation问题
+
+在安装时，有可能出现这种情况：Plugin 'Kotlin' is incompatible with this installation
+
+在这里插入图片描述
+
+这种情况是因为我们下载的插件和idea的版本不匹配，只要下载和idea版本匹配的插件即可。可以参考这篇文章：https://blog.csdn.net/lvoelife/article/details/126402784
+————————————————
+版权声明：本文为CSDN博主「互联网全栈开发实战」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/lvoelife/article/details/126401600
