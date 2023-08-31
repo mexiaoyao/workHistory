@@ -1,0 +1,31 @@
+######本地是win环境######
+
+1：打开CMD窗口，输入mysql -V命令，查看是否有版本号输出，如下所示：mysql -V若有MySQL版本号输出，则表明该电脑已经安装好MySQL。否则，则需要安装MySQL。
+2. 另外一个简单的方法是在CMD中输入where mysql命令，如下所示：where mysql若有输出路径，则表明该电脑已经安装好MySQL。反之，则需要进行MySQL的安装。
+
+######查看MySQL服务的详细信息，可以使用以下命令：#######
+1：sc query MySQL
+以下是查询信息：
+SERVICE_NAME: MySQL
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 1067  (0x42b)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+
+###########CMD登录MYSQL###################
+1. mysql -u root -p
+该命令将连接到本地数据库，并需要输入密码。如果成功进入mysql控制台，即可进行数据库的相关操作。
+2. show databases;
+该命令将列出当前mysql中的所有数据库。
+3. use database_name;
+该命令将进入指定数据库，其中database_name为要进入的数据库名称。
+4. show tables;
+该命令将列出当前所在数据库中所有的数据表。
+5. select * from table_name;
+该命令将查询指定数据表的所有数据，其中table_name为要查询的数据表名称。
+6. update table_name set column_name=value where condition;
+该命令将更新指定数据表中符合条件的数据，其中table_name为要更新的数据表名称，column_name为要更新的列名，value为要更新的值，condition为更新条件。
+7. delete from table_name where condition;
+该命令将删除指定数据表中符合条件的数据，其中table_name为要删除的数据表名称，condition为删除条件。

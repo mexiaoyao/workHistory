@@ -17,3 +17,10 @@
 
 ###########js代码########
 layer.tips(messages.topManagement20, ".input:eq(2)");
+
+
+
+#############css写法##################
+table.roles tr > td:first-child {
+    width: 22%;
+}
