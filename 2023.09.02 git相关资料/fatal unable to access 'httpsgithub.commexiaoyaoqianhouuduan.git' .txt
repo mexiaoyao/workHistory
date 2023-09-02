@@ -1,0 +1,22 @@
+查看是否使用代理;
+
+第一步：
+	点击Git base here；
+	git config --global http.proxy
+
+通过查询系统环境有没有使用代理： env|grep -l proxy；
+
+第二步：解决方法：通过git取消代理
+	git config --global --unset http.proxy
+	git config --global --unset https.proxy
+
+通过系统命令取消代理
+	unset http_proxy
+	unset ftp_proxy
+	unset all_proxy
+	unset https_proxy
+	unset no_proxy
+
+
+
+	
