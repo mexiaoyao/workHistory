@@ -1,0 +1,26 @@
+    .footer-company-technical span{
+        padding: 0px 8px;
+        position: relative;  ##不可或缺
+    }
+    .footer-company-technical span:not(:first-child)::before{
+        content: "";
+        background-color: #CCCCCC;
+        width: 1px;
+        height: 10px;
+        position: absolute; ##不可或缺
+        left: 0;
+        top: 4px;
+    }
+
+实现非第一个的span开头加竖线
+
+
+###########js代码########
+layer.tips(messages.topManagement20, ".input:eq(2)");
+
+
+
+#############css写法##################
+table.roles tr > td:first-child {
+    width: 22%;
+}

@@ -1,0 +1,4 @@
+select{
+	background-color: transparent; //透明
+	background-color: #FFFFFF !important;//#FFFFF的对火狐有效其他颜色的不一定有效，请在实际情况的时候对应处理
+}

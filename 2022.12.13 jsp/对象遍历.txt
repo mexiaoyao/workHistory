@@ -1,0 +1,13 @@
+原始数据
+"dickey": {
+      "1": "手机号", 
+      "3": "邮箱号",
+      "6": "通信号", 
+      "7": "自定义登录账号",
+      "11": "dsdsd"
+}
+
+dickey对应下面的${dickey}
+i.key对应key值
+i.value对应value值
+<c:forEach var="i" items="${dickey}" varStatus="s">							<option value='<c:out value="${i.key}" />' <c:if test="${associationKey == i.key}">selected</c:if>><c:out value="${i.value}" /></option>					</c:forEach>

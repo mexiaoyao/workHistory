@@ -1,0 +1,15 @@
+###promise.all是并发
+###并行是指同一时间同时执行多个任务；并发是指两个或多个事件在同一时间间隔发生。
+
+Promise.all([this.$axiosPost( 'url1', {parmes: parmes}), this.$axiosPost( url2, {parmes1: parmes1})])
+            .then((res) => {
+                const account = res[0]; //url1的结果
+                const config = res[1] ;//url2的结果
+               //其他代码
+            })
+            .catch(() => {
+                console.log("------loginGetOtp-error----");
+            }).finally(()=>{
+                //不管是否报错都要执行的代码
+               
+            })

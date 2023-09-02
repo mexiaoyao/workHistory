@@ -1,0 +1,42 @@
+一、基础用法${ }用``包裹起来
+Const name = '小缘'
+const age = 14
+console.info(`大家好，我叫${name}，今年${age}岁了`)
+// 等价于
+console.info('大家好，我叫' + name + '，今年' + age + '岁了')
+ 
+// 最大的优势是支持换行字符串
+Const url = '//baidu.com'
+Const text = '百度一下，你就知道'
+Const html = `
+  <div class="container">
+    <a href="${url}">${text}</a>
+  </div>
+`
+console.log(html)
+console.log(typeof html)
+
+二、在{ }中使用函数动态传值
+html文件中
+<span :style="`color:${getColor(a.statustext)}`" class="nowStatus">
+   [ {{ a.statustext }} ]
+</span>
+js文件中
+getColor(status) {
+    let color;
+ 
+            if (status === '退回') {
+                color = '#e64545';
+            }
+            if (status === '待受理') {
+                color = '#2e6be5';
+            }
+            if (status === '办结') {
+                color = '#35b389';
+            }
+            if (status === '已回复，待评价') {
+                color = '#f79042';
+            }
+ 
+            return color;
+        },
