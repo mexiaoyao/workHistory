@@ -1,0 +1,5 @@
+在mysql操作工具中，如Navit或者sqllog的等
+1：执行“SHOW VARIABLES LIKE '%event_scheduler%' ”
+////event_scheduler on  表示事件调度器已经开启
+
+2：如果没有开启的话，就执行“SET GLOBAL event_scheduler = ON“，开启事件调度器
