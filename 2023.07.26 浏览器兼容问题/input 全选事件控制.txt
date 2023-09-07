@@ -1,0 +1,22 @@
+1：控制台选择元素；
+2：鼠标选中对应的div或者对应代码；
+3：在控台台查看“事件监听器”；
+4：查找 selectstart,找到对应事件，并找到根源代码。  onselectstart="return false"
+
+禁止鼠标右键：οncοntextmenu="return false"；
+
+禁止选择：onselectstart="return false"；
+
+禁止拖放：οndragstart="return false"；
+
+禁止拷贝：οncοpy=document.selection.empty() 。
+
+禁止复制：oncopy = "return false"；
+
+禁止保存：<noscript><iframe src="*.htm"></iframe></noscript>，放在head里面。
+
+禁止粘贴：<input type=text οnpaste="return false">
+
+禁止剪贴：oncut = "return false"；
+
+关闭输入法：<input style="ime-mode:disabled">
