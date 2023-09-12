@@ -1,0 +1,47 @@
+1：计算属性computed
+
+样式class的通用方法
+import * as classNames from 'classnames';
+
+实际代码
+const isEditIngClass = computed(()=>{
+    return classNames({
+        "bj-color": isEditIng.value
+    })
+});
+
+#####此写法和2.6以前的不一样###一下为旧版写法###
+computed: { //--------------
+        bodyStyle() {
+            return {
+                height: this.height + 'px',
+                overflowY: 'auto'
+            };
+        },
+        okProps() {
+            return {
+                disabled: Array.isArray(this.id) ? this.id.length == 0 : !this.id
+            };
+        }
+    },
+
+
+###############以下是网上找的vue2.6的实例###########
+npm install --save classnames
+
+首先需要在项目中安装Vue Classnames。安装完成后，在Vue组件中引入classnames：
+import classNames from 'classnames';
+接着在Vue实例的computed属性中写入我们要应用的class名称。这里要注意，classnames接受的参数可以是一个字符串、一个对象或者一个数组。
+export default {
+computed: {
+	buttonClass: function () {
+		return classNames({
+			'button': true,
+			'button-primary': this.primary
+		})
+	}
+}
+也有其他更多资料
+https://www.yzktw.com.cn/post/1203425.html
+
+
