@@ -28,3 +28,15 @@ props: {
 ###
 解决报错avoid mutating a prop directly since the value will be overwritten whenever the parent compon...
 
+###
+这时候再使用list这个数据就会报错。
+
+原因：
+
+由于Vue内部的机制，传入的props中的值
+是不允许被修改的。在新的渲染机制中，当父组件重新渲染时，子组件都被会覆盖，这时的props是不可变的。
+解决：
+
+在data中再定义两个新的变量，然后把父组件传过来的值赋值给新的变量，之后操作这两个新的变量即可。
+
+
