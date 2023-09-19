@@ -1,0 +1,42 @@
+一、当el-dialog作为子组件使用，点击右上角的关闭按钮会出现如下报错
+
+**
+报错：[Vue warn]: Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop’s value. Prop being mutated: “editVisible”
+
+出现此错误的原因是：子组件的关闭事件和父组件的关闭事件相冲突了，子组件的可见性要由父组件来控制，不能直接修改visible的值。
+
+<el-dialog :title="''==form.id?'添加':'编辑'" :visible.sync="isShow" :before-close="cancelClick" @cancel="cancelClick" width="420px">
+
+:before-close ////关闭前的回调，会暂停 Dialog 的关闭
+
+cancelClick() {
+    this.$emit("cancel");
+},
+
+#########props的值需要在data中重新赋值####否则可能会执行错误#######
+props: {
+        visible:{
+            type:Boolean,
+            default: false
+        },
+        row: {
+            type: Object,
+            default: () => {},
+        },
+      },
+
+###
+解决报错avoid mutating a prop directly since the value will be overwritten whenever the parent compon...
+
+###
+这时候再使用list这个数据就会报错。
+
+原因：
+
+由于Vue内部的机制，传入的props中的值
+是不允许被修改的。在新的渲染机制中，当父组件重新渲染时，子组件都被会覆盖，这时的props是不可变的。
+解决：
+
+在data中再定义两个新的变量，然后把父组件传过来的值赋值给新的变量，之后操作这两个新的变量即可。
+
+
