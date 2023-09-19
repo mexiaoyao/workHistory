@@ -1,0 +1,44 @@
+
+/deep/ 
+
+ ::v-deep{
+}
+
+除了 /deep/ 以外，>>> 和 ::v-deep也可以实现同样的效果
+
+注意：/deep/ 只能在像 less , sass 等css预处理器中使用，在原生css中使用无效，所以原生css当中应使用 >>> 。
+
+###################################
+
+1、 >>>  使选择器能够作用得“更深”，可以影响到内部子组件
+
+例: 如果项目使用的是css原生样式，那么可以直接使用 >>> 穿透修改
+
+    <style scoped>
+    .a >>> .b { /* ... */ }
+    </style>
+    // 上述代码将会编译成：
+    .a[data-v-f3f3eg9] .b { /* ... */ }
+
+2、 项目中用到了预处理器 scss 、sass、less 操作符 >>> 可能会因为无法编译而报错 。可以使用 /deep/
+
+    <style lang="scss" scoped>
+      .button-box{
+        /deep/ .el-button{
+          padding: 13px 50px;
+        }
+      }
+    </style>
+
+3、如果使用了预处理器都可以使用 ::v-deep。::v-deep与 /deep/都是深度选择器，都能实现对组件内部的样式修改， ::v-deep的记载速度更快
+
+在scss中使用/deep/会报loader错误,这时可以使用::v-deep来代替
+
+    <style lang="scss" scoped>
+    /*用法1*/
+    .a{
+     ::v-deep .b { color:red; }
+    } 
+    /*用法2*/
+    .a ::v-deep .b { color:red;}
+    </style>
